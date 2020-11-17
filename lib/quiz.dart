@@ -12,8 +12,13 @@ class Quiz extends StatelessWidget {
     return Column(
       children: <Widget>[
         Question(question[questionIndex]['questionText']),
-        ...(question[questionIndex]['answers'] as List<String>).map((answer) {
-          return Answer(answerQuestion, answer);
+        ...(question[questionIndex]['answers'] as List<Map<String, Object>>)
+            .map((answer) {
+          return Answer(
+              () => answerQuestion(answer['score']),
+              answer[
+                  'text']); // i want to call function answerQuestion and pass the score
+          // of the chosen answer to it so i will use lamda
         }).toList(),
       ],
     );
